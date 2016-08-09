@@ -72,7 +72,10 @@ public class PickupParent : MonoBehaviour
     public void OnTriggerEnter(Collider col)
     {
         IsTriggerStay = true;
-        _col = col;
+        if (spawnAtom)
+        {
+            _col = col;
+        }
     }
     public void OnTriggerExit(Collider col)
     {
@@ -84,7 +87,7 @@ public class PickupParent : MonoBehaviour
         //Debug.Log("You have collided with " + col.name + " and activated OnTriggerStay");
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
         {
-            //   Debug.Log("You have collided with " + col.name + " while holding down Touch");
+            Debug.Log("You have collided with " + col.name + " while holding down Touch");
             Debug.Log("spawnAtom? " + spawnAtom);
             if (false)//spawnAtom) //not really spawn, just grab from a list
             {
@@ -101,8 +104,12 @@ public class PickupParent : MonoBehaviour
                 }
                 Debug.Log(name + "free: " + scrpt.usedList.Count() + " used: " + scrpt.usedList.Count());
             } 
-            col.attachedRigidbody.isKinematic = true;
-            col.gameObject.transform.SetParent(gameObject.transform);
+            if (spawnAtom)
+            {
+                spawnAtom = false;
+                col.attachedRigidbody.isKinematic = true;
+                col.gameObject.transform.SetParent(gameObject.transform);
+            }
         }
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
         {
