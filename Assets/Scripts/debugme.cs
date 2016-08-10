@@ -15,12 +15,12 @@ public class debugme : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("controller OnTriggerEnter occurs fine");
+        //Debug.Log("controller OnTriggerEnter occurs fine");
         transform.parent.gameObject.GetComponent<PickupParent>().OnTriggerEnter(col);
     }
     void OnTriggerExit(Collider col)
     {
-        Debug.Log("controller OnTriggerExit occurs fine");
+        //Debug.Log("controller OnTriggerExit occurs fine");
         transform.parent.gameObject.GetComponent<PickupParent>().OnTriggerExit(col);
     }
     

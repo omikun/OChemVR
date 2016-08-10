@@ -63,7 +63,7 @@ public class PickupParent : MonoBehaviour
             //sphere.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
 
-        if (IsTriggerStay)
+        if (IsTriggerStay && _col != null)
         {
             OnTriggerStay(_col);
         }
@@ -74,6 +74,7 @@ public class PickupParent : MonoBehaviour
         IsTriggerStay = true;
         if (spawnAtom)
         {
+            Debug.Log(">>>>> added new collider: " + col.gameObject.transform.name);
             _col = col;
         }
     }
@@ -87,8 +88,8 @@ public class PickupParent : MonoBehaviour
         //Debug.Log("You have collided with " + col.name + " and activated OnTriggerStay");
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
         {
-            Debug.Log("You have collided with " + col.name + " while holding down Touch");
-            Debug.Log("spawnAtom? " + spawnAtom);
+            //Debug.Log("You have collided with " + col.name + " while holding down Touch");
+            //Debug.Log("spawnAtom? " + spawnAtom);
             if (false)//spawnAtom) //not really spawn, just grab from a list
             {
                 spawnAtom = false;
@@ -111,15 +112,17 @@ public class PickupParent : MonoBehaviour
                 col.gameObject.transform.SetParent(gameObject.transform);
             }
         }
-        if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
+        if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger) )
         {
-            Debug.Log("You have released Touch while colliding with " + col.name);
+            //Debug.Log("You have released Touch while colliding with " + col.name);
+            //Debug.Log("spawnAtom? " + spawnAtom);
             spawnAtom = true;
-            Debug.Log("spawnAtom? " + spawnAtom);
             col.gameObject.transform.SetParent(null);
             col.attachedRigidbody.isKinematic = false;
 
             tossObject(col.attachedRigidbody);
+            _col = null;
+            Debug.Log("free collider");
         }
     }
 
