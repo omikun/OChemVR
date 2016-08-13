@@ -4,7 +4,7 @@ using System;
 
 public class particleForce : MonoBehaviour {
     public float epsilon = 1.0f;
-    public float delta = 0.3f;
+    public float sigma = 0.3f;
 	// Use this for initialization
 	void Start () {
 	
@@ -21,10 +21,14 @@ public class particleForce : MonoBehaviour {
             if (false)
                 vel = accel / magSqr;
             else { 
-                vel = -1 * 4 * epsilon * (float)(Math.Pow(delta / mag, 4) - Math.Pow(delta / mag, 2));
+                //vel = -1 * 4 * epsilon * (float)(Math.Pow(sigma / mag, 4) - Math.Pow(sigma / mag, 2));
+                var r = mag;
+                var force = -24 * (1 / r) * epsilon * (2 * Math.Pow((sigma / r), 12) - Math.Pow(sigma / r, 6)) ;
+                vel = (float)force * 1.0f / 90.0f;
                 //vel = (Math.Abs(vel) > 0.5f) ? 0.5f*Math.Sign(vel) : vel;
-                if (vel < -0.1f)
-                    vel = -0.1f;
+                //FIXME becomes nand (negative?) vel = (float)Math.Pow(vel, .5f);
+                //if (vel < -0.1f)
+                 //   vel = -0.1f;
             }
         }
         return vel * diff;
