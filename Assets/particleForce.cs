@@ -6,6 +6,7 @@ public class particleForce : MonoBehaviour {
     public float epsilon = 1.0f;
     public float sigma = 0.3f;
     public float maxSpeed = 20;
+    public float maxRange = 30;
 	// Use this for initialization
 	void Start () {
 	
@@ -90,6 +91,23 @@ public class particleForce : MonoBehaviour {
                 c1.GetComponent<Rigidbody>().velocity /= mag/maxSpeed;
         }
 #endif
+        //apply bounding box (max dist from center)
+        foreach (GameObject h1 in hAtoms)
+        {
+            if (h1.transform.position.sqrMagnitude > maxRange)
+            {
+                h1.GetComponent<Rigidbody>().velocity *= 0.2f;
+            }
+        }
+
+       foreach (GameObject c1 in cAtoms)
+        {
+            if (c1.transform.position.sqrMagnitude > maxRange)
+            {
+                c1.GetComponent<Rigidbody>().velocity *= 0.2f;
+            }
+        }
+
 
 	}
 }
