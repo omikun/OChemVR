@@ -5,6 +5,7 @@ using System;
 public class particleForce : MonoBehaviour {
     public float epsilon = 1.0f;
     public float sigma = 0.3f;
+    public float maxSpeed = 20;
 	// Use this for initialization
 	void Start () {
 	
@@ -31,13 +32,13 @@ public class particleForce : MonoBehaviour {
                  //   vel = -0.1f;
             }
         }
-        return vel * diff;
+        return vel / mag * diff;
     }
     // Update is called once per frame
     void FixedUpdate () {
         GameObject[] hAtoms = GameObject.FindGameObjectsWithTag("h");
         GameObject[] cAtoms = GameObject.FindGameObjectsWithTag("c");
-        Debug.Log("number of atoms attraction: " + hAtoms.Length);
+        //Debug.Log("number of atoms attraction: " + hAtoms.Length);
 
         //carbon-carbon pairs
         foreach (GameObject c1 in cAtoms)
@@ -75,17 +76,18 @@ public class particleForce : MonoBehaviour {
 
         //apply max speed
 #if true
+
         foreach(GameObject h1 in hAtoms)
         {
             var mag = h1.GetComponent<Rigidbody>().velocity.magnitude;
-            if (mag > 2)
-                h1.GetComponent<Rigidbody>().velocity /= mag/2;
+            if (mag > maxSpeed)
+                h1.GetComponent<Rigidbody>().velocity /= mag/maxSpeed;
         }
         foreach (GameObject c1 in cAtoms)
         {
             var mag = c1.GetComponent<Rigidbody>().velocity.magnitude;
-            if (mag > 2)
-                c1.GetComponent<Rigidbody>().velocity /= mag/2;
+            if (mag > maxSpeed)
+                c1.GetComponent<Rigidbody>().velocity /= mag/maxSpeed;
         }
 #endif
 
