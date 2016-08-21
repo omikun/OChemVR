@@ -107,7 +107,5 @@ public class particleForce : MonoBehaviour {
                 c1.GetComponent<Rigidbody>().velocity *= 0.2f;
             }
         }
-
-
 	}
 }

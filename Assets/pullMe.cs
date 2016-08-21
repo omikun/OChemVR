@@ -13,11 +13,22 @@ public class pullMe : VRTK_InteractableObject
         base.StartUsing(usingObject);
     }
 
+    Vector3 reduceVelocity(Vector3 v)
+    {
+        var mag = v.magnitude;
+        if (mag > .5f)
+        {
+            v = v / (mag * 2);
+        }
+        return v;
+    }
     public override void StopUsing(GameObject usingObject)
     {
         destObj = null;
         Debug.Log("stop using me");
         base.StopUsing(usingObject);
+        var vel = GetComponent<Rigidbody>().velocity;
+        GetComponent<Rigidbody>().velocity = reduceVelocity(vel);
     }
 
     protected override void Start()
