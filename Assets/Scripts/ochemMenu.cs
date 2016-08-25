@@ -11,11 +11,13 @@ public class ochemMenu : VRTK_InteractableObject
 
     public PrimitiveTypes shape;
     private Color selectedColor;
+    public GameObject spawnMe;
 
     public void SetSelectedColor(Color color)
     {
         selectedColor = color;
         gameObject.GetComponent<MeshRenderer>().material.color = color;
+        Debug.Log("my spawner: new color: " + color);
     }
 
     public override void StartUsing(GameObject usingObject)
@@ -34,11 +36,21 @@ public class ochemMenu : VRTK_InteractableObject
 
     private void CreateShape(PrimitiveType shape, Color color)
     {
-        GameObject obj = GameObject.CreatePrimitive(shape);
-        obj.transform.position = transform.position;
-        obj.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        obj.GetComponent<MeshRenderer>().material.color = color;
-        obj.AddComponent<Rigidbody>();
+        if (true)
+        {
+            GameObject obj = Instantiate(spawnMe);
+            obj.transform.position = transform.position;
+            //obj.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            //obj.GetComponent<MeshRenderer>().material.color = color;
+            //obj.AddComponent<Rigidbody>();
+        } else
+        {
+            GameObject obj = GameObject.CreatePrimitive(shape);
+            obj.transform.position = transform.position;
+            obj.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            obj.GetComponent<MeshRenderer>().material.color = color;
+            obj.AddComponent<Rigidbody>();
+        }
     }
 
     private void ResetMenuItems()

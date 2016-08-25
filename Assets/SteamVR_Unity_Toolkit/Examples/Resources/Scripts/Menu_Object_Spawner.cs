@@ -16,6 +16,7 @@ public class Menu_Object_Spawner : VRTK_InteractableObject
     {
         selectedColor = color;
         gameObject.GetComponent<MeshRenderer>().material.color = color;
+         Debug.Log("default spawner: new color: " + color);
     }
 
     public override void StartUsing(GameObject usingObject)

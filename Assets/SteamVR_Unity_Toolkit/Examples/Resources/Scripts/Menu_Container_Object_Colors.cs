@@ -5,6 +5,10 @@ public class Menu_Container_Object_Colors : VRTK_InteractableObject
 {
     public void SetSelectedColor(Color color)
     {
+        foreach (ochemMenu menuObjectSpawner in gameObject.GetComponentsInChildren<ochemMenu>())
+        {
+            menuObjectSpawner.SetSelectedColor(color);
+        }
         foreach(Menu_Object_Spawner menuObjectSpawner in gameObject.GetComponentsInChildren<Menu_Object_Spawner>())
         {
             menuObjectSpawner.SetSelectedColor(color);
