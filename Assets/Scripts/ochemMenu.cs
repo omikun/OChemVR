@@ -55,7 +55,7 @@ public class ochemMenu : VRTK_InteractableObject
 
     private void ResetMenuItems()
     {
-        foreach (Menu_Object_Spawner menuObjectSpawner in FindObjectsOfType<Menu_Object_Spawner>())
+        foreach (ochemMenu menuObjectSpawner in FindObjectsOfType<ochemMenu>())
         {
             menuObjectSpawner.StopUsing(null);
         }

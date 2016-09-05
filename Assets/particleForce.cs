@@ -59,7 +59,7 @@ public class particleForce : MonoBehaviour {
             //hydrogen-carbon pairs
             foreach(GameObject c1 in cAtoms)
             {
-                var vel = calculateForce(c1.transform.position, h1.transform.position, 0.45f, 0.05f);
+                var vel = calculateForce(c1.transform.position, h1.transform.position, 0.65f, 0.05f);
                 h1.GetComponent<Rigidbody>().velocity += vel;
                 c1.GetComponent<Rigidbody>().velocity -= vel;
             }
@@ -68,7 +68,7 @@ public class particleForce : MonoBehaviour {
             {
                 if (h1 != h2)
                 {
-                    var vel = calculateForce(h2.transform.position, h1.transform.position, 0.25f, 0.01f);
+                    var vel = calculateForce(h2.transform.position, h1.transform.position, 0.65f, 0.01f);
                     h2.GetComponent<Rigidbody>().velocity += vel;
                 }
 
